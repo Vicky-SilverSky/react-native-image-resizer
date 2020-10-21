@@ -144,13 +144,17 @@ public class ImageResizer {
         }
 
         if (maxHeight > 0 && maxWidth > 0) {
-            float width = image.getWidth();
-            float height = image.getHeight();
+//             float width = image.getWidth();
+//             float height = image.getHeight();
 
-            float ratio = Math.min((float)maxWidth / width, (float)maxHeight / height);
+//             float ratio = Math.min((float)maxWidth / width, (float)maxHeight / height);
 
-            int finalWidth = (int) (width * ratio);
-            int finalHeight = (int) (height * ratio);
+//             int finalWidth = (int) (width * ratio);
+//             int finalHeight = (int) (height * ratio);
+            
+            int finalWidth = (int) maxWidth;
+            int finalHeight = (int) maxHeight;
+            
             try {
                 newImage = Bitmap.createScaledBitmap(image, finalWidth, finalHeight, true);
             } catch (OutOfMemoryError e) {
@@ -518,7 +522,8 @@ public class ImageResizer {
         // NOTE: This will "fix" the image using it's exif info if it is rotated as well.
         Bitmap rotatedImage = sourceImage;
         int orientation = getOrientation(context, imageUri);
-        rotation = orientation + rotation;
+        rotation = orientation;
+//             + rotation;
         rotatedImage = ImageResizer.rotateImage(sourceImage, rotation);
 
         if(rotatedImage == null){
